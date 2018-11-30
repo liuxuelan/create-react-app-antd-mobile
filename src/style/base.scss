@@ -1,0 +1,237 @@
+@charset "UTF-8";
+/**
+ * @module 'style/base'
+ * @desc 公用sass变量、函数、mixin 等分装
+ * @author LieZuoPing
+ * @date  2018年7月30日9:52点
+ * @example 调用示例
+ * @import './config.base'
+ */
+
+// 公共样式，sass变量
+$browser_default_font_size: 75 !default; // sass 跟聚设计图定义默认rem更元素，设计图的1/10
+$border_color: #d9d9d9;
+$border_1px_top:linear-gradient(90deg, transparent 50%, $border_color 50%); // 左右边框0.5px
+$border_1px_left: linear-gradient(270deg, transparent 50%, $border_color 50%); // 上下边框
+$demo_background_color: #fff;
+//sass px 转rem函数
+@function px2rem($px) {
+  //$px为需要转换的字号
+  @return $px / $browser_default_font_size * 1rem;
+}
+/**
+ *
+ */
+
+@function px22rem($px) {
+  //$px为需要转换的字号
+  @return $px / 124 * 1rem;
+}
+// 创建一个颜色随机函数
+@function colorRandom () {
+  @return rgba(random() * 225, random() * 225, random() *225, 1);
+}
+
+// sass,伪元素边框定义
+@mixin before_after_common {
+  content: ' ';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  z-index: 1;
+  -webkit-transform-origin: 0 0;
+  transform-origin: 0 0;
+}
+
+// 元素定位mixin
+@mixin location_ele ($top: none, $bottom: none, $left: none, $right:none) {
+  left: $left;
+  right: $right;
+  top: $top;
+  bottom: $bottom;
+}
+
+// 伪元素上边框0.5px实现方法
+@mixin border_top_point5_line ($border_color: #d9d9d9) {
+  @include before_after_common;
+  @include location_ele(0, none, 0, 0);
+  height: 1px;
+  width: 100%;
+  border-top: 1px solid $border_color;
+  color: $border_color;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+// 伪元素下边框0.5px实现方法
+@mixin border_bottom_point5_line ($border_color: #d9d9d9) {
+  @include before_after_common;
+  @include location_ele(none, -1px, 0, 0);
+  height: 2px;
+  border-bottom: 1px solid $border_color;
+  color: $border_color;
+  -webkit-transform: scaleY(0.5);
+  transform: scaleY(0.5);
+}
+
+// 伪元素左边框0.5px实现方法
+@mixin border_left_point5_line ($border_color: #d9d9d9) {
+  @include before_after_common;
+  @include location_ele(0, 0, 0, none);
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid $border_color;
+  color: $border_color;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+}
+
+// 伪元素右框0.5px实现方法
+@mixin border_right_point5_line ($border_color: #d9d9d9) {
+  @include before_after_common;
+  @include location_ele(0, 0, none, 0);
+  width: 1px;
+  height: 100%;
+  border-left: 1px solid $border_color;
+  color: $border_color;
+  -webkit-transform: scaleX(0.5);
+  transform: scaleX(0.5);
+}
+
+//定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin up_center_down {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin left_center_right {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// 颜色变量
+$text1:#333333;
+$text2:#999999;
+$text3:#F5A623;
+$text4:#4a90e2;
+$text5:#a1a1a1;
+$text6:#b9b9b9;
+$white:#ffffff;
+$black:#000000;
+$btn1:#4083ff;
+$btn2:#252525;
+$btn-disabled:#b5b5b5;
+$bg:#f2f2f2;
+$bg2:#eaeaea;
+// $loading-bg:#c5c5c5;
+$loading-bg:rgba(0, 0, 0, .7);
+$border:#d7d7d7;
+$border2:#e5e5e5;
+[v-cloak] {
+  display: none !important;
+}
+
+.verify {
+  ::placeholder {
+    color: $text3;
+  }
+}
+
+.clearfix:before {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  display: table;
+  content: " ";
+  clear: both;
+}
+
+img {
+  border: none;
+  vertical-align: middle;
+}
+
+.img-responsive {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.pull-left {
+  float: left !important;
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.bg-img {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.bg-img-c {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+}
+
+.bg-center {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50%;
+}
+
+// html背景色
+html {
+  background: $bg;
+}
+.left{
+  float: left;
+}
+.right{
+  float: right;
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color:    #999999;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+ color:    #999999;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+ color:    #999999;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color:    #999999;
+}
