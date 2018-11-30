@@ -4,19 +4,23 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 
 import routes from './routes/router'
-import './App.scss';
+import { Provider } from 'react-redux'
+import store from './redux/store'
+
 import './style/reset.scss'
-import Header from './components/header/header'
+import { Header } from './components/index'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header></Header>
-        <Router>
-            {renderRoutes(routes)}
-        </Router>
-      </div>
+      <Provider store={store}>
+        <div className="App">
+          <Header></Header>
+          <Router>
+              {renderRoutes(routes)}
+          </Router>
+        </div>
+      </Provider>
     );
   }
 }
