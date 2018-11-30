@@ -1,9 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-### `npm start` 开发环境开发
+### `npm start` 或 `yarn start` 开发环境开发
 
-### `npm test` 或 `yarn start` 测试
+### `npm test`测试
 
 文档地址： [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
