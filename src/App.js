@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
+
+import routes from './routes/router'
 import logo from './logo.svg';
 import './App.scss';
+import './style/style.less'
 
 class App extends Component {
   render() {
@@ -20,6 +25,9 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <Router>
+          {renderRoutes(routes)}
+        </Router>
       </div>
     );
   }
