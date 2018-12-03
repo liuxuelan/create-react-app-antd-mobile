@@ -23,19 +23,5 @@ const reduxApp = () => (
     <App/>
   </Provider>
 )
-// class App extends Component {
-//   render() {
-//     return (
-//       <Provider store={store}>
-//         <div className="App">
-//           <Header></Header>
-//           <Router>
-//               {renderRoutes(routes)}
-//           </Router>
-//         </div>
-//       </Provider>
-//     );
-//   }
-// }
 
 export default hot(module)(reduxApp);
