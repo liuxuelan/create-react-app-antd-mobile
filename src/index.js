@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'lib-flexible/flexible.js'
+import VConsole from 'vconsole' // 手机端测试用
+new VConsole() // 手机端测试用
+
 require('es6-promise').polyfill()
 
-// import VConsole from 'vconsole' // 手机端测试用
-// let vconsole = new VConsole() // 手机端测试用
+
 
 const FastClick = require('fastclick')
 FastClick.attach(document.body) // 解决点击延迟问题
