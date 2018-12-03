@@ -84,6 +84,7 @@ module.exports = {
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   entry: [
+    'react-hot-loader/patch',
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
     // When you save a file, the client will either apply hot updates (in case
@@ -231,6 +232,7 @@ module.exports = {
                     },
                   },
                 ],
+                'react-hot-loader/babel'
               ],
               // This is a feature of `babel-loader` for webpack (not Babel itself).
               // It enables caching results in ./node_modules/.cache/babel-loader/
@@ -256,10 +258,13 @@ module.exports = {
                   { helpers: true },
                 ],
               ],
+              plugins: [
+                'react-hot-loader/babel'
+              ],
               cacheDirectory: true,
               // Don't waste time on Gzipping the cache
               cacheCompression: false,
-              
+
               // If an error happens in a package, it's possible to be
               // because it was compiled. Thus, we don't want the browser
               // debugger to show the original code. Instead, the code

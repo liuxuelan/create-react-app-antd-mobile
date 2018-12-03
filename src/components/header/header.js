@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Flex } from 'antd-mobile';
+// import { Flex } from 'antd-mobile';
 
 import './header.less'
 
@@ -7,9 +7,9 @@ class Header extends Component{
   render () {
     return (
       <div className="header">
-        <Flex>
+        {/* <Flex>
           <Flex.Item>小柿子App</Flex.Item>
-        </Flex>
+        </Flex> */}
       </div>
     )
   }

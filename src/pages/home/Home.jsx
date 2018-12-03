@@ -10,8 +10,9 @@ class Home extends Component {
   render () {
     return (
       <div className='home'>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        <h1>Hello,  2233111 1world!</h1>
+        <h2>It a is {this.state.date.toLocaleTimeString()}.</h2>
+        <h3>DDDD</h3>
       </div>
     )
   }
