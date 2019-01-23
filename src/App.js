@@ -8,11 +8,9 @@ import { Provider } from 'react-redux'
 import store from './rematch/index'
 
 import './style/reset.scss'
-import { Header } from './components/index'
 
 const App = () => (
   <div className="App">
-    <Header></Header>
     <Router>
         {renderRoutes(routes)}
     </Router>
