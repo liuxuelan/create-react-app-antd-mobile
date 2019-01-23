@@ -1,40 +1,131 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+###React UI组件antd-mobile应用心得
+######And-mobile在create-react-app中的使用
+- Create-react-app初始化与安装
+  ```
+   npm install -g create-react-app
+   create-react-app my-app
+   cd my-app
+   npm start
+  ```
 
 
-### `npm start` 或 `yarn start` 开发环境开发
+- 说明在Create-react-app中使用Antd需要修改配置的的方式：
 
-### `npm test`测试
+一、方案一
+1、安装react-app-rewired（一个对 create-react-app 进行自定义配置的社区解决方案）
 
-文档地址： [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build` 或 `yarn build` 打包
-
-文档地址： [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject` 暴露出config配置
-
-
-## Learn More
-
-creat-react-app 文档地址： [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-react中文文档地址 [React documentation](https://react.docschina.org/docs/getting-started.html).
-
-安装和初始化
-
-$ npm install -g create-react-app  // 全局安装
-
-$ create-react-app my-app  // 创建自己的app
-
-$ cd my-app  // 进入项目
- 
-$ npm start  // 启动项目
-
-### `npm run build` 或 `yarn build` 打包
-
+```
 npm install --save-dev react-app-rewired
+```
 
+2、修改package.json启动项
+
+```
+/* package.json */
+'scripts': {
+  'start': 'react-app-rewired start',
+  'build': 'react-app-rewired build',
+  'test': 'react-app-rewired test --env=jsdom',
+}
+```
+3、在项目根目录创建一个 config-overrides.js 用于修改默认配置。
+```
+  module.exports = function override(config, env) {
+    return config
+  }
+```
+
+4、使用babel-plugin-import实现Antd按需加载，修改config-overrides.js
+```
 npm install --save-dev babel-plugin-import
+```
 
+5、使用react-app-rewire-less配置Less
+
+```
 npm install --save-dev react-app-rewire-less
+```
+
+```
+/* config-overrides.js */
+const { injectBabelPlugin } = require('react-app-rewired');
+const rewireLess = require('react-app-rewire-less');
+
+module.exports = function override(config, env) {
+   config = injectBabelPlugin(['import', { libraryName: 'antd-mobile', style: true }], config);
+   config = rewireLess.withLoaderOptions({
+     modifyVars: { "@primary-color": "#1DA57A" },
+   })(config, env);
+    return config;
+};
+```
+二、方案二
+
+npm run eject 暴露所有内建的配置
+
+1、使用babel-plugin-import实现Antd按需加载，修改package.json，或者在项目根目录新建文件.babelrc写配置，注意是二选一。
+```
+npm install --save-dev babel-plugin-import
+```
+**   修改package.json
+```
+"babel": {
+    "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd-mobile",
+          "style": true
+        }
+      ]
+    ]
+  },
+  "devDependencies": {
+    "babel-plugin-import": "^1.11.0"
+  }
+  ```
+
+***   .babelrc
+```
+{
+   "presets": [
+      "react-app"
+    ],
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "style": true
+        }
+      ]
+    ]
+}
+```
+
+注意： 不要认为package.json里已有presets配置这里就不用写，这里的.babelrc会覆盖package.json里带有的babel配置，如果删除presets配置，会报错。
+
+### 能开项目中antd-mobile的使用总结
+
+1、首先安装依赖
+      $ npm install antd-mobile —save
+
+2、配置文件按需加载用到的组件（注：官方推荐两种方法，能开项目中目前没搞清楚用的什么）
+    
+        libraryName: 'antd-mobile’,      // 注入依赖的名字
+        style: true,                                 // 会加载less文件（style：css会加载css文件）
+  注：在项目里设置的是加载less文件，所以项目中需要安装less和less-loader
+ 安装：npm install --save-dev less-loader less
+ 配置：
+
+3、具体应用
+
+
+
+
+
+注意：在用到相关antd-mobile的组件时，一定要在对应组件外套一个具有唯一性class名的div,当组件样式不满足需求时，修改相应组件样式需在该类名之类，根据less的编译方法以及套用，不能直接以该组件的class名直接开始修改，这样会导致该样式污染全局
 
